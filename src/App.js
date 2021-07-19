@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+
+import style from './App.module.css';
+
+import Character from "./page/character";
+import Episode from "./page/episode";
+import DetailsCharacter from "./components/detailsCharacter";
+
+import Menu from './components/menu';
+import Title from './components/title';
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={style.contenedor}> 
+      <Router>
+        <Menu />
+        <Title title="Rick and Morty"/>
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to="/character" />
+          </Route>
+          <Route path="/character">
+            <Character />
+          </Route>
+          <Route path="/episode">
+            <Episode />
+          </Route>
+          <Route path="/detailsCharacter/:id">
+            <DetailsCharacter />
+          </Route>
+        </Switch>
+      </Router>
     </div>
+
   );
 }
 
